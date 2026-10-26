@@ -1,0 +1,4 @@
+This is a Brave Creators publisher verification file.
+
+Domain: crypto-money-tools.netlify.app
+Token: 1fef796e3759d3a9fd4c271ee5fc3ddc76aa15111d2e3da4987fe42a1b9b14bd

@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Savings Goal Calculator | Free Widget</title><meta name="description" content="Free embeddable savings goal calculator widget by Crypto Money Tools."><link rel="canonical" href="https://crypto-money-tools.netlify.app/embed/savings-goal.html"><style>*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b2a41;background:#fff;font-size:15px;line-height:1.45}
+.w{max-width:520px;margin:0 auto;padding:12px 14px;border:1px solid #dde3ea;border-radius:10px;background:#f6f8fb}
+h1{font-size:1.15em;margin:0 0 8px;color:#0b6e4f}
+.g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 10px}.g3{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+label{display:block;font-size:.85em;color:#445}input{width:100%;padding:7px 8px;border:1px solid #bbc;border-radius:6px;font-size:1em;background:#fff;margin-top:2px}
+.sec{font-weight:600;font-size:.9em;margin:10px 0 4px}
+.out{margin-top:10px;background:#fff;border:1px solid #dde3ea;border-left:4px solid #0b6e4f;border-radius:6px;padding:9px 11px}
+.big{font-size:1.35em;font-weight:700;color:#0b6e4f}.d{font-size:.8em;color:#667}.warn{color:#b3261e;font-weight:600}
+.ft{margin-top:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;font-size:.78em}.ft a{color:#0b6e4f}.ft a.p{color:#667;text-decoration:none}.ft a.p:hover{text-decoration:underline}
+@media(max-width:340px){.g{grid-template-columns:1fr}}</style></head><body><div class="w"><h1>Savings Goal Calculator</h1>
+<div class="g"><label>Savings goal $<input id="goal" inputmode="decimal" value="5000"></label><label>Already saved $<input id="sv" inputmode="decimal" value="500"></label>
+<label>Months to reach it<input id="mo" inputmode="decimal" value="12"></label><label>Interest (APY %)<input id="apy" inputmode="decimal" value="4"></label></div><div class="out" id="r" aria-live="polite"></div>
+<div class="ft"><a href="https://crypto-money-tools.netlify.app/" target="_blank" rel="noopener">Free calculator by Crypto Money Tools</a><a class="p" href="https://payhip.com/b/r7TH4" target="_blank" rel="noopener">Savings Challenge Printables &rarr;</a></div></div>
+<script>function $(i){return document.getElementById(i)}function v(i){return parseFloat(($(i).value||'0').replace(/[^0-9.\-]/g,''))||0}function m(x,d){d=d===undefined?2:d;return '$'+x.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})}
+document.addEventListener('input',go);function go(){var G=v('goal'),P=v('sv'),n=Math.max(1,Math.round(v('mo'))),r=v('apy')/100/12;var fv=P*Math.pow(1+r,n),need=Math.max(0,G-fv),pm=r>0?need*r/(Math.pow(1+r,n)-1):need/n;
+var dep=pm*n,ie=Math.max(0,G-P-dep);var d=new Date();d.setMonth(d.getMonth()+n);
+$('r').innerHTML=(need<=0?'<b>You already have enough if your savings keep earning interest. &#127881;</b>':'Save <span class=big>'+m(pm)+'/month</span><br>That is about '+m(pm*12/52)+'/week or '+m(pm*12/365)+'/day')+'<br><span class=d>Goal date: '+d.toLocaleDateString(undefined,{month:'short',year:'numeric'})+' &middot; interest earned approx. '+m(ie,0)+'</span>'}go();</script></body></html>

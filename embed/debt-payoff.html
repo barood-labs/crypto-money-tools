@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Debt Payoff Calculator | Free Widget</title><meta name="description" content="Free embeddable debt payoff calculator widget by Crypto Money Tools."><link rel="canonical" href="https://crypto-money-tools.netlify.app/embed/debt-payoff.html"><style>*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b2a41;background:#fff;font-size:15px;line-height:1.45}
+.w{max-width:520px;margin:0 auto;padding:12px 14px;border:1px solid #dde3ea;border-radius:10px;background:#f6f8fb}
+h1{font-size:1.15em;margin:0 0 8px;color:#0b6e4f}
+.g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 10px}.g3{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+label{display:block;font-size:.85em;color:#445}input{width:100%;padding:7px 8px;border:1px solid #bbc;border-radius:6px;font-size:1em;background:#fff;margin-top:2px}
+.sec{font-weight:600;font-size:.9em;margin:10px 0 4px}
+.out{margin-top:10px;background:#fff;border:1px solid #dde3ea;border-left:4px solid #0b6e4f;border-radius:6px;padding:9px 11px}
+.big{font-size:1.35em;font-weight:700;color:#0b6e4f}.d{font-size:.8em;color:#667}.warn{color:#b3261e;font-weight:600}
+.ft{margin-top:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;font-size:.78em}.ft a{color:#0b6e4f}.ft a.p{color:#667;text-decoration:none}.ft a.p:hover{text-decoration:underline}
+@media(max-width:340px){.g{grid-template-columns:1fr}}</style></head><body><div class="w"><h1>Debt Payoff Calculator</h1>
+<div class="g"><label>Debt balance $<input id="bal" inputmode="decimal" value="6000"></label><label>Interest rate (APR %)<input id="apr" inputmode="decimal" value="22"></label>
+<label>Monthly payment $<input id="pay" inputmode="decimal" value="250"></label><label>Extra per month $<input id="ex" inputmode="decimal" value="50"></label></div><div class="out" id="r" aria-live="polite"></div>
+<div class="ft"><a href="https://crypto-money-tools.netlify.app/" target="_blank" rel="noopener">Free calculator by Crypto Money Tools</a><a class="p" href="https://payhip.com/b/sp9Jy" target="_blank" rel="noopener">Debt Payoff Planner &rarr;</a></div></div>
+<script>function $(i){return document.getElementById(i)}function v(i){return parseFloat(($(i).value||'0').replace(/[^0-9.\-]/g,''))||0}function m(x,d){d=d===undefined?2:d;return '$'+x.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})}
+document.addEventListener('input',go);function sim(B,r,p){var n=0,I=0;while(B>0.005&&n<1200){var i=B*r;I+=i;B=B+i-p;n++}return B>0.005?null:{n:n,I:I}}
+function lbl(n){var y=Math.floor(n/12),mo=n%12;return (y?y+' yr ':'')+(mo?mo+' mo':'')}
+function go(){var B=v('bal'),r=v('apr')/100/12,p=v('pay'),x=v('ex');if(B<=0){$('r').innerHTML='Enter a balance.';return}
+var a=sim(B,r,p),b=sim(B,r,p+x),h='';
+if(!a&&!b){$('r').innerHTML='<span class=warn>This payment does not cover the monthly interest ('+m(B*r)+'). Pay more to make progress.</span>';return}
+if(b){var d=new Date();d.setMonth(d.getMonth()+b.n);h='Debt-free in <span class=big>'+lbl(b.n)+'</span> ('+d.toLocaleDateString(undefined,{month:'short',year:'numeric'})+')<br>Total interest: <b>'+m(b.I,0)+'</b>';}
+if(a&&b&&x>0)h+='<br><span class=d>The extra '+m(x,0)+'/mo saves '+m(a.I-b.I,0)+' interest and '+lbl(a.n-b.n)+'.</span>';
+else if(!a&&x>0)h+='<br><span class=d>Without the extra payment, the debt would never be paid off.</span>';
+$('r').innerHTML=h}go();</script></body></html>
